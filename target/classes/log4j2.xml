@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%X{iteration}] [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <File name="LogToFileKij" fileName="logs/kijelento.log">
+            <MarkerFilter marker="Kijelentő!" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="LogToFileKerd" fileName="logs/kerdo.log">
+            <MarkerFilter marker="Kérdő!" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="LogToFileNomark" fileName="logs/nomarker.log">
+            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="LogToFileGyorfipal" fileName="logs/Győrfi_Pál.log">
+            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
+
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+
+
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="LogToFileKij"/>
+            <AppenderRef ref="LogToFileKerd"/>
+            <AppenderRef ref="LogToFileNomark">
+                <TimeFilter start="20:00:00" end="05:00:00" onMatch="Deny" onMismatch="ACCEPT"/>
+            </AppenderRef>
+            <AppenderRef ref="LogToFileGyorfipal">
+                <TimeFilter start="20:00:00" end="05:00:00" onMatch="ACCEPT" onMismatch="DENY"/>
+            </AppenderRef>
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>
